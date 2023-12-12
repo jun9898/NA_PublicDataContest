@@ -15,8 +15,6 @@ import { Fontisto } from '@expo/vector-icons';
 import {useNavigation, useRoute} from "@react-navigation/native";
 
 const SCREEN_WIDTH = Dimensions.get("window").width;
-const testtext = "test"
-const recomment = "test"
 
 const BoardDetail = () => {
 
@@ -87,6 +85,7 @@ const BoardDetail = () => {
             const response = await fetch(`http://${ip}:9000/api/board/check/${id}`);
             setIsAdmin(true);
         }
+        fetchData();
     };
 
     useEffect(() => {
@@ -183,7 +182,10 @@ const BoardDetail = () => {
                                         />
                                         <Text style={!recommend.includes(userId) ?  styles.bottomBtnText : {...styles.bottomBtnText, color: "white"} }>{recommend.length}</Text>
                                     </View>
+
                                 </TouchableOpacity>
+                                <View style={data.state === "NONE" ? styles.checkContainer : {...styles.checkContainer, backgroundColor: theme.skyblue}}/>
+
                             </View>
                         </View>
 
@@ -193,9 +195,9 @@ const BoardDetail = () => {
 
                         {/*답변 영역*/}
                         {recommendArrComponent()}
-
-
                     </View>
+
+
                 </ScrollView>
             </View>
         </View>
@@ -294,6 +296,14 @@ const styles = StyleSheet.create({
     textContainer: {
         width: SCREEN_WIDTH*0.95,
         flex: 1
+    },
+    checkContainer: {
+        height: 43.4,
+        width: 53,
+        borderRadius: 15,
+        borderWidth: 3,
+        borderColor: theme.skyblue,
+        backgroundColor: "white",
     },
 });
 

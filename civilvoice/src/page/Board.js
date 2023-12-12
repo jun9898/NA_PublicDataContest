@@ -29,6 +29,7 @@ const Board = ({route}) => {
     useEffect(() => {
         const unsubscribe = navigation.addListener('focus', () => {
             // 화면이 focus 될 때마다(fetchData 함수 실행)
+            setRequest(true);
             fetchData();
         });
 
@@ -116,9 +117,9 @@ const Board = ({route}) => {
                             keyExtractor={(_) => _.id}
                             style={styles.agendaContainer}
                             renderItem={({ item }) => {
-                                const { id ,title, recommend, check } = item;
+                                const { id ,title, recommend, state } = item;
                                 return (
-                                    <BoardRead id={id} title={title} like={recommend} check={check}/>
+                                    <BoardRead id={id} title={title} like={recommend} check={state}/>
                                 )
                             }}
                             onEndReached={handleLoadMore} // 스크롤이 끝에 도달했을 때 호출
